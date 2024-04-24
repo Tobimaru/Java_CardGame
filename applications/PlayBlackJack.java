@@ -1,4 +1,4 @@
-import cards.BlackJack;
+import com.github.Tobimaru.cards.BlackJack;
 import java.util.Scanner;
 
 public class PlayBlackJack {

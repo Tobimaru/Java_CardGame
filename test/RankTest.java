@@ -1,6 +1,6 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import cards.Rank;
+import com.github.Tobimaru.cards.Rank;
 
 public class RankTest {
     @Test
