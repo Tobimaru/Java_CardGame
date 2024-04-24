@@ -7,7 +7,6 @@ public enum Suit{
     CLUBS (39);
         
     public final int nmb_id;
-    //public int rank;
         
     Suit(int id_numb){
         this.nmb_id = id_numb;
