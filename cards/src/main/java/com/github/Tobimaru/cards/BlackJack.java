@@ -36,20 +36,27 @@ public class BlackJack extends CardGame {
         }
     };
     
-    private static class BJValue{
+    private static final class BJValue{
         
-        int soft;
-        int hard;
+        private int soft;
+        private int hard;
         
-        BJValue(){
-            this.soft = 0;
-            this.hard = 0;
-            
+        BJValue(int soft, int hard){
+            this.soft = soft;
+            this.hard = hard;
         }
         
-        void add(final BJValue a_val){
-            this.soft += a_val.soft;
-            this.hard += a_val.hard;
+        int soft(){
+            return this.soft;
+        }
+
+        int hard(){
+            return this.hard;
+        } 
+
+        void add(final BJValue other){
+            this.soft += other.soft;
+            this.hard += other.hard;
         }       
         
     }
@@ -57,54 +64,33 @@ public class BlackJack extends CardGame {
     private static final HashMap<Rank,BJValue> BJ_CARD_VALUES = new HashMap<Rank,BJValue>();
     static {
         for (Rank rk : Rank.values()){
-            BJValue a_val = new BJValue();
-            
-            switch (rk){
-                case ACE: {
-                    a_val.soft = 1;
-                    a_val.hard = 11; 
-                    break;}
-                case TWO: {
-                    a_val.soft = 2;
-                    a_val.hard = 2;
-                    break;}
-                case THREE: {
-                    a_val.soft = 3;
-                    a_val.hard = 3;
-                    break;}
-                case FOUR: {
-                    a_val.soft = 4;
-                    a_val.hard = 4;
-                    break;}
-                case FIVE: {
-                    a_val.soft = 5;
-                    a_val.hard = 5;
-                    break;}
-                case SIX: {
-                    a_val.soft = 6;
-                    a_val.hard = 6;
-                    break;}
-                case SEVEN: {
-                    a_val.soft = 7;
-                    a_val.hard = 7;
-                    break;}
-                case EIGHT: {
-                    a_val.soft = 8;
-                    a_val.hard = 8;
-                    break;}
-                case NINE: {
-                    a_val.soft = 9;
-                    a_val.hard = 9;
-                    break;}        
+            BJValue val = switch (rk){
+                case ACE:
+                    yield new BJValue(1,11);
+                case TWO: 
+                    yield new BJValue(2, 2);
+                case THREE: 
+                    yield new BJValue(3, 3);
+                case FOUR: 
+                    yield new BJValue(4, 4);
+                case FIVE:
+                    yield new BJValue(5, 5);
+                case SIX: 
+                    yield new BJValue(6, 6);
+                case SEVEN:
+                    yield new BJValue(7, 7);
+                case EIGHT: 
+                    yield new BJValue(8, 8);
+                case NINE:
+                    yield new BJValue(9, 9);        
                 case TEN: 
                 case JACK:
                 case QUEEN:
-                case KING: a_val.soft = 10;
-                            a_val.hard = 10;
-                            break; 
-            }
+                case KING:
+                    yield new BJValue(10, 10); 
+            };
                 
-            BJ_CARD_VALUES.put(rk, a_val);
+            BJ_CARD_VALUES.put(rk, val);
         } 
     }
     
@@ -121,7 +107,7 @@ public class BlackJack extends CardGame {
         boolean canSplit;
         
         BJHand(){
-            this.myValue = new BJValue();
+            this.myValue = new BJValue(0,0);
             this.myCards = new ArrayDeque<>();
             this.myHardStatus = BJ_STATUS.VALID;
             this.mySoftStatus = this.myHardStatus;
@@ -145,8 +131,8 @@ public class BlackJack extends CardGame {
         private void check_splittable(final PlayCard new_card){
             
             if (this.myCards.size() == 1){ 
-               this.canSplit = this.myValue.hard == 
-                               BJ_CARD_VALUES.get(new_card.myRank).hard;
+               this.canSplit = this.myValue.hard() == 
+                               BJ_CARD_VALUES.get(new_card.myRank).hard();
             }else{
                 this.canSplit = false;
             }
@@ -169,7 +155,7 @@ public class BlackJack extends CardGame {
         
         private void check_status(){
             //check if the soft value is different
-            if (this.myValue.hard != this.myValue.soft){this.alsoSoft = true;} 
+            if (this.myValue.hard() != this.myValue.soft()){this.alsoSoft = true;} 
             
             if (this.myCards.size() == 2){ 
                 
@@ -177,24 +163,24 @@ public class BlackJack extends CardGame {
                    this.myHardStatus = BJ_STATUS.BLACKJACK;
                }
                this.myStatus = this.myHardStatus;
-               this.myHandValue = this.myValue.hard;
+               this.myHandValue = this.myValue.hard();
                
             }else if(this.myCards.size() > 2){
                 this.myHardStatus = this.check_bust_or_twone(this.myValue.hard);
                 
                 if (this.alsoSoft){
                     this.mySoftStatus = 
-                            this.check_bust_or_twone(this.myValue.soft);
+                            this.check_bust_or_twone(this.myValue.soft());
                 }else{
                     this.mySoftStatus = this.myHardStatus;
                 }
                 
                 if (this.myHardStatus == BJ_STATUS.BUST){
                   this.myStatus = this.mySoftStatus;
-                  this.myHandValue = this.myValue.soft;
+                  this.myHandValue = this.myValue.soft();
                 }else{
                   this.myStatus = this.myHardStatus;
-                  this.myHandValue = this.myValue.hard;  
+                  this.myHandValue = this.myValue.hard();  
                 }
             }
         }
@@ -210,11 +196,11 @@ public class BlackJack extends CardGame {
         public String print(){
             
             String value_str = this.print_cards();
-            value_str += String.format(" %d ",this.myValue.hard);
+            value_str += String.format(" %d ",this.myValue.hard());
             value_str += this.myHardStatus.message;
             value_str += "  ";
             if (this.alsoSoft){
-                value_str+= String.format(" %d(soft) ",this.myValue.soft);
+                value_str+= String.format(" %d(soft) ",this.myValue.soft());
                 value_str += this.mySoftStatus.message;
             }
             
@@ -247,9 +233,9 @@ public class BlackJack extends CardGame {
     
     private boolean check_dealer_status(){
         //Dealer stands on all 17
-        boolean continue_flag = this.dealer_hand.myValue.hard < BJ_DEALER_THRESH;
+        boolean continue_flag = this.dealer_hand.myValue.hard() < BJ_DEALER_THRESH;
         if (!continue_flag){
-            continue_flag = this.dealer_hand.myValue.soft < BJ_DEALER_THRESH;
+            continue_flag = this.dealer_hand.myValue.soft() < BJ_DEALER_THRESH;
         }
         return(continue_flag);
     }
