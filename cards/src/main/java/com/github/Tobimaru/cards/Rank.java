@@ -21,14 +21,5 @@ public enum Rank {
     Rank(int id_numb){
         this.nmb_id = id_numb;
     }
-    
-    public static Rank[] sortvalues(){
-        /**This function returns the enumeration values 
-         * in sorted ascending order.
-         */
-        Rank[] sort_ranks = {ACE,TWO,THREE,FOUR,FIVE,SIX,SEVEN,EIGHT,NINE,
-                             TEN,JACK,QUEEN,KING};
-        return sort_ranks;
-    }
 }
     

@@ -7,11 +7,11 @@ import com.github.Tobimaru.cards.Suit;
 public class SuitTest {
     @Test
     public void testSuitSort(){
-        var sortedSuits = Suit.sortvalues();
+        var suits = Suit.values();
 
-        Suit[] expectedSortedSuits = {Suit.SPADES, Suit.HEARTS, 
+        Suit[] expectedSuits = {Suit.SPADES, Suit.HEARTS, 
                                         Suit.DIAMONDS, Suit.CLUBS};
 
-        assertArrayEquals(expectedSortedSuits, sortedSuits);
+        assertArrayEquals(expectedSuits, suits);
     }
 }

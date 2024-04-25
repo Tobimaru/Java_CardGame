@@ -11,14 +11,6 @@ public enum Suit{
     Suit(int id_numb){
         this.nmb_id = id_numb;
     }
-    
-    public static Suit[] sortvalues(){
-        /**This function returns the enumeration values 
-         * in sorted ascending order.
-         */
-        Suit[] sort_suits = {SPADES, HEARTS, DIAMONDS, CLUBS};
-        return sort_suits;
-    }
         
 }
    

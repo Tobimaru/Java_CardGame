@@ -7,13 +7,13 @@ import com.github.Tobimaru.cards.Rank;
 public class RankTest {
     @Test
     public void testRankSort(){
-        var sortedRanks = Rank.sortvalues();
+        var ranks = Rank.values();
 
-        Rank[] expectedSortedRanks = 
+        Rank[] expectedRanks = 
             {Rank.ACE, Rank.TWO, Rank.THREE, Rank.FOUR, Rank.FIVE, Rank.SIX,
                 Rank.SEVEN, Rank.EIGHT, Rank.NINE, Rank.TEN, 
                 Rank.JACK, Rank.QUEEN, Rank.KING};
 
-        assertArrayEquals(expectedSortedRanks, sortedRanks);
+        assertArrayEquals(expectedRanks, ranks);
     }
 }

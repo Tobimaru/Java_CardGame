@@ -58,7 +58,7 @@ public class BlackJack extends CardGame {
     
     private static void assign_card_values(){
        if (BJ_CARD_VALUES.isEmpty()){
-            for (Rank rk : Rank.sortvalues()){
+            for (Rank rk : Rank.values()){
                 BJValue a_val = new BJValue();
                 
                 switch (rk){

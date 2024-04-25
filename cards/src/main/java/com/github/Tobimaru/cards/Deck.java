@@ -13,8 +13,8 @@ public final class Deck {
     public Integer myId; //number to id deck
     
     private void create_deck(){
-       for (Suit st : Suit.sortvalues()){
-           for (Rank rk : Rank.sortvalues()){
+       for (Suit st : Suit.values()){
+           for (Rank rk : Rank.values()){
                this.myCards.add(new PlayCard(rk,st));
                this.myCards.get(this.myCards.size()-1).set_deck(this);
                this.mySuits.add(st);
