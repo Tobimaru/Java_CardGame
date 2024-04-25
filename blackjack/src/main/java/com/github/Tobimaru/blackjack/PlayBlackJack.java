@@ -1,4 +1,4 @@
-package com.github.Tobimaru.blackjack
+package com.github.Tobimaru.blackjack;
 
 import com.github.Tobimaru.cards.BlackJack;
 import java.util.Scanner;
