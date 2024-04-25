@@ -1,4 +1,4 @@
-package cards;
+package com.github.Tobimaru.cards;
 
 public enum Rank {
     ACE (1),

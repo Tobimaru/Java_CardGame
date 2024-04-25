@@ -1,4 +1,4 @@
-package cards;
+package com.github.Tobimaru.cards;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -54,7 +54,7 @@ public class BlackJack extends CardGame {
         
     }
     
-    private static final HashMap<Rank,BJValue> BJ_CARD_VALUES = new HashMap();
+    private static final HashMap<Rank,BJValue> BJ_CARD_VALUES = new HashMap<Rank,BJValue>();
     
     private static void assign_card_values(){
        if (BJ_CARD_VALUES.isEmpty()){

@@ -1,6 +1,6 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import cards.Suit;
+import com.github.Tobimaru.cards.Suit;
 
 public class SuitTest {
     @Test
