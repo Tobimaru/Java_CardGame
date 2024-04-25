@@ -62,17 +62,48 @@ public class BlackJack extends CardGame {
                 BJValue a_val = new BJValue();
                 
                 switch (rk){
-                    case ACE: a_val.soft = 1;
-                              a_val.hard = 11;
-                              break;
+                    case ACE: {
+                        a_val.soft = 1;
+                        a_val.hard = 11; 
+                        break;}
+                    case TWO: {
+                        a_val.soft = 2;
+                        a_val.hard = 2;
+                        break;}
+                    case THREE: {
+                        a_val.soft = 3;
+                        a_val.hard = 3;
+                        break;}
+                    case FOUR: {
+                        a_val.soft = 4;
+                        a_val.hard = 4;
+                        break;}
+                    case FIVE: {
+                        a_val.soft = 5;
+                        a_val.hard = 5;
+                        break;}
+                    case SIX: {
+                        a_val.soft = 6;
+                        a_val.hard = 6;
+                        break;}
+                    case SEVEN: {
+                        a_val.soft = 7;
+                        a_val.hard = 7;
+                        break;}
+                    case EIGHT: {
+                        a_val.soft = 8;
+                        a_val.hard = 8;
+                        break;}
+                    case NINE: {
+                        a_val.soft = 9;
+                        a_val.hard = 9;
+                        break;}        
                     case TEN: 
                     case JACK:
                     case QUEEN:
                     case KING: a_val.soft = 10;
                                a_val.hard = 10;
                                break; 
-                    default: a_val.soft = rk.nmb_id;
-                             a_val.hard = rk.nmb_id;
                 }
                 
                 BJ_CARD_VALUES.put(rk, a_val);
