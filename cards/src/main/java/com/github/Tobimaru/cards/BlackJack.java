@@ -61,7 +61,7 @@ public class BlackJack extends CardGame {
         
     }
     
-    private static final HashMap<Rank,BJValue> BJ_CARD_VALUES = new HashMap<Rank,BJValue>();
+    private static final HashMap<Rank,BJValue> BJ_CARD_VALUES = new HashMap<>();
     static {
         for (Rank rk : Rank.values()){
             BJValue val = switch (rk){
